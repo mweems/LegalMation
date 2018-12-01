@@ -1,7 +1,5 @@
-import xml.etree.ElementTree as ET
-
+import xmltodict
 
 def ParseFile(file):
-	tree = ET.parse(file)
-	root = tree.getroot()
-	return root
+	data = dict(dict(xmltodict.parse(file))['document'])['page']['block']
+	return len(data)
