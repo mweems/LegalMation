@@ -36,6 +36,5 @@ class Tests(unittest.TestCase):
 					</block>
 				</page>
 			</document>''')
-		print(type(examp))
 		self.assertIsInstance(list, type(examp))
 
