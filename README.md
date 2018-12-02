@@ -1,8 +1,11 @@
 # LegalMation
-an xml parser
 
-clone project
-open folder you cloned project in
-open a terminal and navigate to the folder
-type the command 'flask run'
-open the localhost website
+clone project from github
+execute init shell script in project root
+	this will setup the virtualenv
+	install dependencies
+	start server
+
+run tests
+open terminal and navigate to the project root
+run `nose2`
