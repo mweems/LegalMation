@@ -5,6 +5,19 @@
   </head>
   <body>
     <a href="/">Add Another File</a><br/>
-  	{{data}}
+    <div>
+      Plaintiff/s
+      {% for plaintiff in data.plaintiffs%}
+        <div>{{plaintiff}}</div>
+        <hr>
+      {% endfor %}
+    </div>
+    <div>
+      Defendants
+      {% for defendant in data.defendants%}
+        <div>{{defendant}}</div>
+        <hr>
+      {% endfor %}
+    </div>
   </body>
 </html>

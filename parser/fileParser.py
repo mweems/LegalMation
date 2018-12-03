@@ -3,21 +3,18 @@ import re
 
 PLAINTREGS = [
 	re.compile('.*\w-- --(.+)(-- --)+Plaintiff'),
- 	re.compile('.*\w-- --(.+)(-- --)+Plaintiff'),
- 	re.compile('.*\w-- --(.+)(-- --)+Plaintiff'),
+ 	re.compile('-- --+Plaintiff (\w* \w*)'),
  ]
 
 DEFENDANTREGS = [
-	re.compile('.*\w-- --(.+)(-- --)+Plaintiff'),
- 	re.compile('.*\w-- --(.+)(-- --)+Plaintiff'),
- 	re.compile('.*\w-- --(.+)(-- --)+Plaintiff'),
+	re.compile('vs.-- --(.*)Defendants'),
+ 	re.compile('-- --v(.*) --Defendants'),
  ]
-
 
 def ParseFile(file):
 	tree = ET.parse(file)
 	root = tree.getroot()
-	data = "-- --".join(root.itertext())
+	data = "-- --".join(root.itertext()).replace("\n", '')
 
 	results = {}
 
@@ -31,8 +28,9 @@ def GetPlaintiffs(data):
 	plaintiffs = []
 	
 	for item in PLAINTREGS:
-		match = item.match(data.replace("\n", ""))
-		plaintiffs.append(match.group(1).replace("-- --", ''))
+		match = item.search(data)
+		if match:
+			plaintiffs.append(match.group(1).replace("-- --", ''))
 
 	return plaintiffs
 
@@ -41,8 +39,9 @@ def GetDefendants(data):
 	defendants = []
 
 	for item in DEFENDANTREGS:
-		match = item.match(data.replace("\n", ""))
-		defendants.append(match.group(1).replace("-- --", ''))
+		match = item.search(data)
+		if match:
+			defendants.append(match.group(1).replace("-- --", ''))
 
 	return defendants
 
