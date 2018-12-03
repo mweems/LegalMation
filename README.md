@@ -6,6 +6,7 @@
  		this will setup the virtualenv
 		install dependencies
 		start server
+		http://localhost:5000
 
 ## run tests
 	open terminal and navigate to the project root
